@@ -30,9 +30,11 @@ modules:
       properties:
         srv-url: ${default-url}
    parameters:
-     memory: 512M
+     memory: 256M
+     instances: 4
      health-check-type: http
      health-check-http-endpoint: /health
+     health-check-timeout: 720
 
 
  # -------------------- SIDECAR MODULE ------------------------
