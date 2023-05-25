@@ -6,16 +6,32 @@
   "license": "Apache-2.0",
   "private": false,
   "dependencies": {
-    "@cap-js/graphql": "0.5.0",
+    "@cap-js/graphql": "^0.5.0",
     "@sap/cds": "^6.8.1",
     "@sap/cds-common-content": "^1.1.0",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "@sap/xb-msg-amqp-v100": "^0.9.58",
+    "@sap/approuter": "^14.1.1",
+    "@sap/hdbext": "^7.7.4",
+    "@sap/hana-client": "^2.16.26",
+    "@sap/hdi": "^4.4.0",
+    "@sap/hdi-deploy": "^4.6.1",
+    "@sap/jobs-client": "^1.7.47",
+    "@sap/logger-for-bas-extensions": "^1.1.0",
+    "@sap/logging": "^6.2.0",
+    "@sap/audit-logging": "^5.7.0",
+    "@sap/xsenv": "^3.4.0",
+    "@sap/xssec": "^3.2.17",
+    "@sap/html5-app-deployer": "^5.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "hdb": "^0.19.5",
+    "swagger-ui": "^4.19.0",
+    "swagger-parser": "^10.0.3",
     "swagger-ui-express": "^4.6.3",
-    "uuid": "^9.0"
+    "uuid": "^9.0",
+    "passport": "^0.6.0",
+    "mta": "^1.0.4"
   },
   "engines": {
     "node": ">=14.18.0"
@@ -26,6 +42,9 @@
     "watch": "cds watch --profile hybrid --livereload false",
     "build": "cds build",
     "build2": "cp ./gen/db/.env ./ && cds build && cp ./.env ./gen/db/",
+    "buildmtar": "rm -rf mta_archives && cds build && mbt build --mtar archive",
+    "deploymtar": "cf deploy mta_archives/archive.mtar --retries 1",
+    "undeploymtar": "cf undeploy cap --delete-services --delete-service-keys --delete-service-brokers",
     "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram",
     "asyncapi": "cds compile srv --service all -o docs --to asyncapi",
     "load": "node convertData",
@@ -36,7 +55,7 @@
     "pack": "pack build cap-hana-swapi-srv --path gen/srv --builder paketobuildpacks/builder:base"
   },
   "cds": {
-    "query":{
+    "query": {
       "limit": {
         "reliablePaging": true
       }
@@ -108,8 +127,19 @@
     "@sap/cds-dk": "^6.8.0",
     "@sap/eslint-plugin-cds": "^2.6.3",
     "@sap/hdi-deploy": "^4.6.0",
+    "@sap/approuter": "^14.1.1",
+    "@sap/async-xsjs": "^1.0.4",
+    "@ui5/cli": "^3.1.3",
     "cds2types": "^3.0.0",
     "eslint": "^8.39.0",
-    "stringify-changelog": "^0.2.1"
+    "stringify-changelog": "^0.2.1",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.17",
+    "@types/sap__logging": "^6.2.0",
+    "@types/sap__xsenv": "^3.3.0",
+    "mbt": "^1.2.23",
+    "mta-local": "^1.0.4",
+    "rimraf": "^5.0.1"
   }
 }
