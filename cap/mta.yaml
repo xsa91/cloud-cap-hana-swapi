@@ -8,7 +8,7 @@ version: 1.1.5
 description: "A simple CAP project."
 parameters:
   enable-parallel-deployments: true
-   
+
 build-parameters:
   before-all:
    - builder: custom
@@ -31,11 +31,6 @@ modules:
         srv-url: ${default-url}
    parameters:
      memory: 256M
-     instances: 4
-     health-check-type: http
-     health-check-http-endpoint: /health
-     health-check-timeout: 720
-
 
  # -------------------- SIDECAR MODULE ------------------------
  - name: cap-hana-swapi-db
@@ -47,7 +42,6 @@ modules:
    requires:
     # 'hana' and 'xsuaa' resources extracted from CAP configuration
     - name: starwars
-
 
 resources:
  # services extracted from CAP configuration
